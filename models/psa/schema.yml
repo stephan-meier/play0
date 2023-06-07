@@ -1,0 +1,34 @@
+
+version: 2
+
+models:
+  - name: customer_curr
+    description: "Current Kundentabelle ohne Identity Column"
+    columns:
+      - name: CustID
+        description: "Kundennummer OHNE Autoincrement"
+        tests:
+          - not_null
+
+  - name: order_data
+    description: "Bestelldaten mit Preis angereichert ohne Identity Column"
+    columns:
+      - name: OrdID
+        description: "Ordernummer OHNE Autoincrement, falls wir mal historisieren wollen"
+        tests:
+          - not_null
+      
+sources:
+  - name: nw_db
+    database: "Northwind"
+    schema: "dbo"
+    tables:
+      - name: Customers
+        identifier: Customers
+      - name: Orders
+        identifiers: Orders
+      - name: OrderDetails
+        identifier: OrderDetails
+      - name: Products
+        identifier: Products
+        
